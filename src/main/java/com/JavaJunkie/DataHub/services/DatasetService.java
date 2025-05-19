@@ -21,7 +21,7 @@ public class DatasetService {
     }
 
     @Transactional(readOnly = true)
-    public Dataset get(String datasetId) {
+    public Datasets get(String datasetId) {
         return repo.findById(datasetId)
                 .orElseThrow(() -> new IllegalArgumentException("Dataset not found"));
     }

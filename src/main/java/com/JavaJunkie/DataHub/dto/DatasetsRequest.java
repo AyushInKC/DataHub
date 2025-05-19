@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class DatasetRequest {
+public class DatasetsRequest {
     String name;
     String description;
     Datasets.Visibility visibility;

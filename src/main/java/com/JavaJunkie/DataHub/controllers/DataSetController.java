@@ -1,7 +1,8 @@
 package com.JavaJunkie.DataHub.controllers;
 
-import com.JavaJunkie.DataHub.dto.DatasetRequest;
-import com.JavaJunkie.DataHub.dto.DatasetResponse;
+import com.JavaJunkie.DataHub.dto.DatasetsRequest;
+import com.JavaJunkie.DataHub.dto.DatasetsResponse;
+import com.JavaJunkie.DataHub.dto.DatasetsResponse;
 import com.JavaJunkie.DataHub.models.Datasets;
 import com.JavaJunkie.DataHub.services.DatasetService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class DataSetController {
 
 
     @PostMapping
-    public ResponseEntity<DatasetResponse> create(@RequestBody DatasetRequest req, Principal principal) {
+    public ResponseEntity<DatasetsResponse> create(@RequestBody DatasetsRequest req, Principal principal) {
         Datasets d = svc.create(
                 principal.getName(),
                 req.getName(),
@@ -37,12 +38,12 @@ public class DataSetController {
 
 
     @GetMapping
-    public List<DatasetResponse> listMine(Principal principal) {
+    public List<DatasetsResponse> listMine(Principal principal) {
         return svc.listMine(principal.getName()).stream().map(this::toDto).toList();
     }
 
     @GetMapping("/{id}")
-    public DatasetResponse get(@PathVariable String id) {
+    public DatasetsResponse get(@PathVariable String id) {
         return toDto(svc.get(id));
     }
 
@@ -54,10 +55,13 @@ public class DataSetController {
     }
 
 
-    private DatasetResponse toDto(Datasets d) {
-        return new DatasetResponse(d.getId(), d.getName(),
-                d.getVisibility(), d.getEngine(),
-                d.getDescription());
+    private DatasetsResponse toDto(Datasets d) {
+        return new DatasetsResponse(
+                d.getId(),
+                d.getName(),
+                d.getVisibility(),
+                d.getEngine(),
+                d.getDescription()
+        );
     }
-
 }
