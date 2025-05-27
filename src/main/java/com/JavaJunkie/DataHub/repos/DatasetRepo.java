@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface DatasetRepo extends MongoRepository<Datasets,String> {
     List<Datasets> findByOwnerId(String ownerId);
     Optional<Datasets> findByOwnerIdAndName(String ownerId, String name);
+    List<Datasets> findByOwnerIdAndDeletedFalse(String ownerId);
+
 }

@@ -54,7 +54,17 @@ public class DataSetController {
         svc.delete(id, principal.getName());
     }
 
+    @PutMapping("/{id}")
+    public DatasetsResponse update(@PathVariable String id, @RequestBody DatasetsRequest req, Principal principal) {
+        Datasets updated = svc.update(id, principal.getName(), req.getName(), req.getDescription(), req.getVisibility());
+        return toDto(updated);
+    }
 
+    @PatchMapping("/{id}/restore")
+    public DatasetsResponse restore(@PathVariable String id, Principal principal) {
+        Datasets restored = svc.restore(id, principal.getName());
+        return toDto(restored);
+    }
     private DatasetsResponse toDto(Datasets d) {
         return new DatasetsResponse(
                 d.getId(),

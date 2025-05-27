@@ -16,11 +16,6 @@ public class DatasetService {
     }
 
     @Transactional(readOnly = true)
-    public List<Datasets> listMine(String ownerId) {
-        return repo.findByOwnerId(ownerId);
-    }
-
-    @Transactional(readOnly = true)
     public Datasets get(String datasetId) {
         return repo.findById(datasetId)
                 .orElseThrow(() -> new IllegalArgumentException("Dataset not found"));
@@ -49,5 +44,42 @@ public class DatasetService {
         repo.deleteById(datasetId);
     }
 
+
+    public Datasets update(String id, String ownerId, String name, String description, Datasets.Visibility visibility) {
+        Datasets dataset = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dataset not found"));
+
+        if (!dataset.getOwnerId().equals(ownerId)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        dataset.setName(name);
+        dataset.setDescription(description);
+        dataset.setVisibility(visibility);
+
+        return repo.save(dataset);
+    }
+
+    public Datasets restore(String id, String ownerId) {
+        Datasets dataset = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dataset not found"));
+
+        if (!dataset.getOwnerId().equals(ownerId)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        if (!dataset.isDeleted()) {
+            throw new RuntimeException("Dataset is not deleted");
+        }
+
+        dataset.setDeleted(false);
+        return repo.save(dataset);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<Datasets> listMine(String ownerId) {
+        return repo.findByOwnerIdAndDeletedFalse(ownerId);
+    }
 
 }
