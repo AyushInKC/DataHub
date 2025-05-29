@@ -40,8 +40,8 @@ public class DatasetService {
         if (!d.getOwnerId().equals(requesterId))
             throw new SecurityException("Only owner can delete dataset");
 
-        // TODO: cascade delete branches + checkpoints, delete S3 dumps
-        repo.deleteById(datasetId);
+        d.setDeleted(true); 
+        repo.save(d);
     }
 
 
