@@ -21,7 +21,7 @@ public class DataSetController {
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<DatasetsResponse> create(@RequestBody DatasetsRequest req, Principal principal) {
         Datasets d = svc.create(
                 principal.getName(),
@@ -34,7 +34,7 @@ public class DataSetController {
     }
 
 
-    @GetMapping
+    @GetMapping("/listMine")
     public List<DatasetsResponse> listMine(Principal principal) {
         return svc.listMine(principal.getName()).stream().map(this::toDto).toList();
     }

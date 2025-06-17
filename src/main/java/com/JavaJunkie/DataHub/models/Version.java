@@ -1,20 +1,21 @@
 package com.JavaJunkie.DataHub.models;
 
-import jakarta.persistence.Entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 
-@Entity
+@Document(collection = "versions")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Version {
+
     @Id
     private String id;
 
@@ -30,5 +31,4 @@ public class Version {
 
     @DBRef
     private Version parent;
-
 }
