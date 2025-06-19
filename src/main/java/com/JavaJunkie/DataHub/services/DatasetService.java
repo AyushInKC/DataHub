@@ -1,4 +1,5 @@
 package com.JavaJunkie.DataHub.services;
+import com.JavaJunkie.DataHub.Enums.Visibility;
 import com.JavaJunkie.DataHub.models.Datasets;
 import com.JavaJunkie.DataHub.repos.DatasetRepo;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class DatasetService {
     }
 
     @Transactional
-    public Datasets create(String ownerId, String name, String description, Datasets.Visibility visibility) {
+    public Datasets create(String ownerId, String name, String description, Visibility visibility) {
         if (repo.findByOwnerIdAndName(ownerId, name).isPresent())
             throw new IllegalArgumentException("Dataset name already exists for this owner");
 
@@ -45,7 +46,7 @@ public class DatasetService {
     }
 
 
-    public Datasets update(String id, String ownerId, String name, String description, Datasets.Visibility visibility) {
+    public Datasets update(String id, String ownerId, String name, String description, Visibility visibility) {
         Datasets dataset = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Dataset not found"));
 

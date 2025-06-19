@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "68539b31e6a5fa31ce4bef8c"
+  },
+  "name": "Sample Dataset",
+  "ownerId": "testuser",
+  "engine": "mongo",
+  "description": "Demo for testing",
+  "createdAt": {
+    "$date": "2025-06-19T05:08:01.712Z"
+  },
+  "visibility": "PUBLIC",
+  "deleted": false,
+  "_class": "com.JavaJunkie.DataHub.models.Datasets"
+}]

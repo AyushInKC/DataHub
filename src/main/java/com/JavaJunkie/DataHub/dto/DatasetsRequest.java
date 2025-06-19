@@ -1,5 +1,6 @@
 package com.JavaJunkie.DataHub.dto;
 
+import com.JavaJunkie.DataHub.Enums.Visibility;
 import com.JavaJunkie.DataHub.models.Datasets;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +10,5 @@ import lombok.Setter;
 public class DatasetsRequest {
     String name;
     String description;
-    Datasets.Visibility visibility;
+    Visibility visibility;
 }

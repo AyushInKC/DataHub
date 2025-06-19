@@ -1,4 +1,5 @@
 package com.JavaJunkie.DataHub.models;
+import com.JavaJunkie.DataHub.Enums.Visibility;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -34,7 +35,6 @@ public class Datasets {
     @Builder.Default
     private Visibility visibility = Visibility.PUBLIC;
 
-    public enum Visibility { PUBLIC, PRIVATE }
     @Builder.Default
     private boolean deleted = false;
 }
